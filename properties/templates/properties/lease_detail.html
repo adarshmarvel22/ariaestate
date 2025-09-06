@@ -1,0 +1,24 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'properties_Lease_list' %}">
+    Lease Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>monthly_rent</td><td>{{ object.monthly_rent }}</td></tr>
+    <tr><td>start_date</td><td>{{ object.start_date }}</td></tr>
+    <tr><td>tenant_name</td><td>{{ object.tenant_name }}</td></tr>
+    <tr><td>end_date</td><td>{{ object.end_date }}</td></tr>
+    <tr><td>created</td><td>{{ object.created }}</td></tr>
+    <tr><td>id</td><td>{{ object.id }}</td></tr>
+    <tr><td>last_updated</td><td>{{ object.last_updated }}</td></tr>
+    <tr><td>unit</td><td>{{ object.unit }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'research_Document_list' %}">
+    Document Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>id</td><td>{{ object.id }}</td></tr>
+    <tr><td>created</td><td>{{ object.created }}</td></tr>
+    <tr><td>last_updated</td><td>{{ object.last_updated }}</td></tr>
+    <tr><td>uploaded_at</td><td>{{ object.uploaded_at }}</td></tr>
+    <tr><td>file</td><td>{{ object.file }}</td></tr>
+    <tr><td>project</td><td>{{ object.project }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'accounts_Profile_list' %}">
+    Profile Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="avatar">avatar: </label>
+      <input class="form-control col-sm-10"
+         id="avatar" type="file"
+         name="avatar" value="{{ object.avatar }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="created">created: </label>
+      <input class="form-control col-sm-10"
+         id="created" type="datetime-local"
+         name="created" value="{{ object.created }}" disabled>
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="last_updated">last_updated: </label>
+      <input class="form-control col-sm-10"
+         id="last_updated" type="datetime-local"
+         name="last_updated" value="{{ object.last_updated }}" disabled>
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="phone">phone: </label>
+      <input class="form-control col-sm-10"
+         id="phone" type="text"
+         name="phone" value="{{ object.phone }}">
+  </div>
+<div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="name">name: </label>
+      <input class="form-control col-sm-10"
+         id="name" type="text"
+         name="name" value="{{ object.name }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="bio">bio: </label>
+      <input class="form-control col-sm-10"
+         id="bio" type="text"
+         name="bio" value="{{ object.bio }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="id">id: </label>
+      <input class="form-control col-sm-10"
+         id="id" type="text"
+         name="id" value="{{ object.id }}" disabled>
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="address">address: </label>
+      <input class="form-control col-sm-10"
+         id="address" type="text"
+         name="address" value="{{ object.address }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="user">user: </label>
+      {{ form.user }}
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

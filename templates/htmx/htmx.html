@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<script src="https://unpkg.com/htmx.org@1.8.4"></script>
+<script>
+  htmx.config.useTemplateFragments = true;
+</script>
+{% endblock %}
+{% block allcontent %}
+<div id="content" class="container">
+  <h2>Home: <a href="{% url 'index' %}">Project1233</a></h2>
+  <div class="container">
+    <div class="row">
+    
+      <div class="col col-lg-6">
+        <h5>Add A Cart</h5>
+        <div hx-get="{% url 'ecommerce_Cart_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Cart List</h4>
+        <div hx-get="{% url 'ecommerce_Cart_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A CartItem</h5>
+        <div hx-get="{% url 'ecommerce_CartItem_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>CartItem List</h4>
+        <div hx-get="{% url 'ecommerce_CartItem_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Order</h5>
+        <div hx-get="{% url 'ecommerce_Order_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Order List</h4>
+        <div hx-get="{% url 'ecommerce_Order_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Payment</h5>
+        <div hx-get="{% url 'ecommerce_Payment_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Payment List</h4>
+        <div hx-get="{% url 'ecommerce_Payment_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Product</h5>
+        <div hx-get="{% url 'ecommerce_Product_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Product List</h4>
+        <div hx-get="{% url 'ecommerce_Product_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Comment</h5>
+        <div hx-get="{% url 'forum_Comment_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Comment List</h4>
+        <div hx-get="{% url 'forum_Comment_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Like</h5>
+        <div hx-get="{% url 'forum_Like_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Like List</h4>
+        <div hx-get="{% url 'forum_Like_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Post</h5>
+        <div hx-get="{% url 'forum_Post_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Post List</h4>
+        <div hx-get="{% url 'forum_Post_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Tag</h5>
+        <div hx-get="{% url 'forum_Tag_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Tag List</h4>
+        <div hx-get="{% url 'forum_Tag_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Category</h5>
+        <div hx-get="{% url 'properties_Category_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Category List</h4>
+        <div hx-get="{% url 'properties_Category_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Lease</h5>
+        <div hx-get="{% url 'properties_Lease_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Lease List</h4>
+        <div hx-get="{% url 'properties_Lease_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Project</h5>
+        <div hx-get="{% url 'properties_Project_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Project List</h4>
+        <div hx-get="{% url 'properties_Project_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Unit</h5>
+        <div hx-get="{% url 'properties_Unit_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Unit List</h4>
+        <div hx-get="{% url 'properties_Unit_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Document</h5>
+        <div hx-get="{% url 'research_Document_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Document List</h4>
+        <div hx-get="{% url 'research_Document_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A ResearchProject</h5>
+        <div hx-get="{% url 'research_ResearchProject_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>ResearchProject List</h4>
+        <div hx-get="{% url 'research_ResearchProject_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Team</h5>
+        <div hx-get="{% url 'research_Team_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Team List</h4>
+        <div hx-get="{% url 'research_Team_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Profile</h5>
+        <div hx-get="{% url 'accounts_Profile_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Profile List</h4>
+        <div hx-get="{% url 'accounts_Profile_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A Role</h5>
+        <div hx-get="{% url 'accounts_Role_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>Role List</h4>
+        <div hx-get="{% url 'accounts_Role_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A User</h5>
+        <div hx-get="{% url 'accounts_User_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>User List</h4>
+        <div hx-get="{% url 'accounts_User_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

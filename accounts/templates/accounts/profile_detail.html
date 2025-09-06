@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'accounts_Profile_list' %}">
+    Profile Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>avatar</td><td>{{ object.avatar }}</td></tr>
+    <tr><td>created</td><td>{{ object.created }}</td></tr>
+    <tr><td>last_updated</td><td>{{ object.last_updated }}</td></tr>
+    <tr><td>phone</td><td>{{ object.phone }}</td></tr>
+    <tr><td>name</td><td>{{ object.name }}</td></tr>
+    <tr><td>bio</td><td>{{ object.bio }}</td></tr>
+    <tr><td>id</td><td>{{ object.id }}</td></tr>
+    <tr><td>address</td><td>{{ object.address }}</td></tr>
+    <tr><td>user</td><td>{{ object.user }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="m-2"><h4>ecommerce</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Cart_list' %}">Cart Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_CartItem_list' %}">CartItem Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Order_list' %}">Order Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Payment_list' %}">Payment Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Product_list' %}">Product Listing</a></div>
+<div class="m-2"><h4>forum</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Comment_list' %}">Comment Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Like_list' %}">Like Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Post_list' %}">Post Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Tag_list' %}">Tag Listing</a></div>
+<div class="m-2"><h4>properties</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Category_list' %}">Category Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Lease_list' %}">Lease Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Project_list' %}">Project Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Unit_list' %}">Unit Listing</a></div>
+<div class="m-2"><h4>research</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'research_Document_list' %}">Document Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'research_ResearchProject_list' %}">ResearchProject Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'research_Team_list' %}">Team Listing</a></div>
+<div class="m-2"><h4>accounts</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'accounts_Profile_list' %}">Profile Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'accounts_Role_list' %}">Role Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'accounts_User_list' %}">User Listing</a></div>
+<div class='container'>
+<div class='card'>
+<div class='card-body'>
+<div><a href="{% url 'htmx' %}">HTMX UI</a></div>
+</div>
+</div>
+</div>
+{% endblock %}
