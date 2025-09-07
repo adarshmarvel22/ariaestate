@@ -1,34 +1,114 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="m-2"><h4>ecommerce</h4></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Cart_list' %}">Cart Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_CartItem_list' %}">CartItem Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Order_list' %}">Order Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Payment_list' %}">Payment Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'ecommerce_Product_list' %}">Product Listing</a></div>
-<div class="m-2"><h4>forum</h4></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Comment_list' %}">Comment Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Like_list' %}">Like Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Post_list' %}">Post Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'forum_Tag_list' %}">Tag Listing</a></div>
-<div class="m-2"><h4>properties</h4></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Category_list' %}">Category Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Lease_list' %}">Lease Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Project_list' %}">Project Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'properties_Unit_list' %}">Unit Listing</a></div>
-<div class="m-2"><h4>research</h4></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'research_Document_list' %}">Document Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'research_ResearchProject_list' %}">ResearchProject Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'research_Team_list' %}">Team Listing</a></div>
-<div class="m-2"><h4>accounts</h4></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'accounts_Profile_list' %}">Profile Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'accounts_Role_list' %}">Role Listing</a></div>
-<div class="m-2"><a class="btn btn-light" href="{% url 'accounts_User_list' %}">User Listing</a></div>
-<div class='container'>
-<div class='card'>
-<div class='card-body'>
-<div><a href="{% url 'htmx' %}">HTMX UI</a></div>
-</div>
-</div>
-</div>
+    <div class="main-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ariaestate Dashboard</h2>
+                <p>Manage all aspects of your property platform from one place</p>
+            </div>
+            
+
+            <div class="row">
+                <!-- Ecommerce Module -->
+                <div class="col-md-6 col-lg-4 mb-4 animate-card">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Ecommerce</h3>
+                        <p>Manage products, orders, and payments</p>
+                        <div class="module-links">
+                            <a href="{% url 'ecommerce_Cart_list' %}" class="module-link">Cart Listing</a>
+                            <a href="{% url 'ecommerce_CartItem_list' %}" class="module-link">CartItem Listing</a>
+                            <a href="{% url 'ecommerce_Order_list' %}" class="module-link">Order Listing</a>
+                            <a href="{% url 'ecommerce_Payment_list' %}" class="module-link">Payment Listing</a>
+                            <a href="{% url 'ecommerce_Product_list' %}" class="module-link">Product Listing</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Forum Module -->
+                <div class="col-md-6 col-lg-4 mb-4 animate-card delay-1">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Forum</h3>
+                        <p>Engage with community discussions</p>
+                        <div class="module-links">
+                            <a href="{% url 'forum_Comment_list' %}" class="module-link">Comment Listing</a>
+                            <a href="{% url 'forum_Like_list' %}" class="module-link">Like Listing</a>
+                            <a href="{% url 'forum_Post_list' %}" class="module-link">Post Listing</a>
+                            <a href="{% url 'forum_Tag_list' %}" class="module-link">Tag Listing</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Properties Module -->
+                <div class="col-md-6 col-lg-4 mb-4 animate-card delay-2">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Properties</h3>
+                        <p>Manage properties, units, and leases</p>
+                        <div class="module-links">
+                            <a href="{% url 'properties_Category_list' %}" class="module-link">Category Listing</a>
+                            <a href="{% url 'properties_Lease_list' %}" class="module-link">Lease Listing</a>
+                            <a href="{% url 'properties_Project_list' %}" class="module-link">Project Listing</a>
+                            <a href="{% url 'properties_Unit_list' %}" class="module-link">Unit Listing</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Research Module -->
+                <div class="col-md-6 col-lg-4 mb-4 animate-card delay-3">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Research</h3>
+                        <p>Access research documents and projects</p>
+                        <div class="module-links">
+                            <a href="{% url 'research_Document_list' %}" class="module-link">Document Listing</a>
+                            <a href="{% url 'research_ResearchProject_list' %}" class="module-link">ResearchProject Listing</a>
+                            <a href="{% url 'research_Team_list' %}" class="module-link">Team Listing</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accounts Module -->
+                <div class="col-md-6 col-lg-4 mb-4 animate-card">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Accounts</h3>
+                        <p>Manage user accounts and profiles</p>
+                        <div class="module-links">
+                            <a href="{% url 'accounts_Profile_list' %}" class="module-link">Profile Listing</a>
+                            <a href="{% url 'accounts_Role_list' %}" class="module-link">Role Listing</a>
+                            <a href="{% url 'accounts_User_list' %}" class="module-link">User Listing</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HTMX UI Module -->
+                <div class="col-md-6 col-lg-4 mb-4 animate-card delay-1">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Modern UI</h3>
+                        <p>Experience the modern HTMX interface</p>
+                        <div class="module-links">
+                            <a href="{% url 'htmx' %}" class="module-link">HTMX UI</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 {% endblock %}
