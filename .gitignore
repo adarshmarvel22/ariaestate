@@ -21,6 +21,8 @@ media/
 staticfiles/
 static/
 local_settings.py
+upload/images/
+
 
 # Environment
 .env
