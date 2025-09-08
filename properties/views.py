@@ -2,6 +2,8 @@ from django.views import generic
 from django.urls import reverse_lazy
 from . import models
 from . import forms
+from .models import Project, ProjectImage
+from .forms import ProjectForm, ProjectImageFormSet
 
 
 class CategoryListView(generic.ListView):
@@ -65,6 +67,24 @@ class ProjectCreateView(generic.CreateView):
     model = models.Project
     form_class = forms.ProjectForm
 
+    def get_context_data(self, **kwargs):
+        print("testin 4g")
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data["images"] = ProjectImageFormSet(self.request.POST, self.request.FILES)
+        else:
+            data["images"] = ProjectImageFormSet()
+        return data
+    
+    def form_valid(self, form):
+        print("testing 5")
+        context = self.get_context_data()
+        images = context["images"]
+        self.object = form.save()
+        if images.is_valid():
+            images.instance = self.object
+            images.save()
+        return super().form_valid(form)
 
 class ProjectDetailView(generic.DetailView):
     model = models.Project
@@ -75,6 +95,27 @@ class ProjectUpdateView(generic.UpdateView):
     model = models.Project
     form_class = forms.ProjectForm
     pk_url_kwarg = "pk"
+
+    def get_context_data(self, **kwargs):
+        print("testing")
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data["images"] = ProjectImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
+        else:
+            data["images"] = ProjectImageFormSet(instance=self.object)
+        return data
+
+    def form_valid(self, form):
+        print("testing 2")
+        context = self.get_context_data()
+        images = context["images"]
+        self.object = form.save()
+        if images.is_valid():
+            images.instance = self.object
+            images.save()
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+        return super().form_valid(form)
 
 
 class ProjectDeleteView(generic.DeleteView):

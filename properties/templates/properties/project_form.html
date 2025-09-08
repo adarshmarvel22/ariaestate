@@ -1,70 +1,277 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    
-<p>
-    <a class="btn btn-light" href="{% url 'properties_Project_list' %}">
-    Project Listing
-    </a>
-</p>
-    
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{form.errors}}
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="last_updated">last_updated: </label>
-      <input class="form-control col-sm-10"
-         id="last_updated" type="datetime-local"
-         name="last_updated" value="{{ object.last_updated }}" disabled>
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="launch_date">launch_date: </label>
-      <input class="form-control col-sm-10"
-         id="launch_date" type="date"
-         name="launch_date" value="{{ object.launch_date }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="price_range">price_range: </label>
-      <input class="form-control col-sm-10"
-         id="price_range" type="text"
-         name="price_range" value="{{ object.price_range }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="title">title: </label>
-      <input class="form-control col-sm-10"
-         id="title" type="text"
-         name="title" value="{{ object.title }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="description">description: </label>
-      <input class="form-control col-sm-10"
-         id="description" type="text"
-         name="description" value="{{ object.description }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="created">created: </label>
-      <input class="form-control col-sm-10"
-         id="created" type="datetime-local"
-         name="created" value="{{ object.created }}" disabled>
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="id">id: </label>
-      <input class="form-control col-sm-10"
-         id="id" type="text"
-         name="id" value="{{ object.id }}" disabled>
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="location">location: </label>
-      <input class="form-control col-sm-10"
-         id="location" type="text"
-         name="location" value="{{ object.location }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="category">category: </label>
-      {{ form.category }}
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <!-- Header with back button -->
+            <div class="d-flex align-items-center mb-4">
+                <a href="{% url 'properties_Project_list' %}" class="btn btn-outline-light rounded-circle me-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h1 class="h3 text-white mb-0">
+                    {% if object %}Edit{% else %}Create{% endif %} Project
+                </h1>
+            </div>
 
+            <!-- Form Card -->
+            <div class="card border-0 shadow-lg form-card">
+                <div class="card-header bg-dark py-3 border-bottom">
+                    <h5 class="text-white mb-0">Project Details</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Please correct the errors below:</strong>
+                            <ul class="mb-0 mt-2">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ field|title }}: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <!-- ID Field (Readonly) -->
+                                <div class="form-group mb-4">
+                                    <label for="id" class="form-label text-light">ID</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="id" type="text"
+                                        name="id" value="{{ object.id|default:'' }}" disabled>
+                                    <div class="form-text text-muted">Unique identifier for this project</div>
+                                </div>
+                                
+                                <!-- Title Field -->
+                                <div class="form-group mb-4">
+                                    <label for="title" class="form-label text-light">Project Title</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="title" type="text"
+                                        name="title" value="{{ object.title|default:'' }}" 
+                                        placeholder="Enter project title">
+                                    <div class="form-text text-muted">A descriptive name for the project</div>
+                                </div>
+                                
+                                <!-- Location Field -->
+                                <div class="form-group mb-4">
+                                    <label for="location" class="form-label text-light">Location</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="location" type="text"
+                                        name="location" value="{{ object.location|default:'' }}" 
+                                        placeholder="Enter project location">
+                                    <div class="form-text text-muted">Where the project is located</div>
+                                </div>
+                                
+                                <!-- Price Range Field -->
+                                <div class="form-group mb-4">
+                                    <label for="price_range" class="form-label text-light">Price Range</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="price_range" type="text"
+                                        name="price_range" value="{{ object.price_range|default:'' }}" 
+                                        placeholder="e.g., $200K - $500K">
+                                    <div class="form-text text-muted">The price range for units in this project</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <!-- Category Field -->
+                                <div class="form-group mb-4">
+                                    <label for="category" class="form-label text-light">Category</label>
+                                    {{ form.category }}
+                                    <div class="form-text text-muted">Select the category for this project</div>
+                                </div>
+                                
+                                <!-- Launch Date Field -->
+                                <div class="form-group mb-4">
+                                    <label for="launch_date" class="form-label text-light">Launch Date</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="launch_date" type="date"
+                                        name="launch_date" value="{{ object.launch_date|date:'Y-m-d'|default:'' }}">
+                                    <div class="form-text text-muted">When the project will be launched</div>
+                                </div>
+                                
+                                <!-- Readonly Fields -->
+                                <div class="form-group mb-4">
+                                    <label for="created" class="form-label text-light">Created</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="created" type="text"
+                                        name="created" value="{{ object.created|date:'M d, Y H:i'|default:'Not created yet' }}" disabled>
+                                </div>
+                                
+                                <div class="form-group mb-4">
+                                    <label for="last_updated" class="form-label text-light">Last Updated</label>
+                                    <input class="form-control form-control-lg bg-dark text-light border-0"
+                                        id="last_updated" type="text"
+                                        name="last_updated" value="{{ object.last_updated|date:'M d, Y H:i'|default:'Not updated yet' }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Description Field (Full Width) -->
+                        <div class="form-group mb-4">
+                            <label for="description" class="form-label text-light">Description</label>
+                            <textarea class="form-control bg-dark text-light border-0"
+                                id="description" name="description" 
+                                rows="4" placeholder="Enter project description">{{ object.description|default:'' }}</textarea>
+                            <div class="form-text text-muted">Detailed description of this project (max 100 characters)</div>
+                        </div>
+
+                        <!-- Image formset -->
+                        <h5 class="text-light">Project Images</h5>
+                        {{ images.management_form }}
+                        {% for subform in images %}
+                            <div class="form-group mb-3">
+                                {{ subform.image }}
+                                {% if subform.instance.pk %}
+                                    <img src="{{ subform.instance.image.url }}" class="img-thumbnail mt-2" style="max-height:150px;">
+                                {% endif %}
+                                {{ subform.DELETE }} <label>Delete</label>
+                            </div>
+                        {% endfor %}
+                        
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-between align-items-center mt-5">
+                            <a href="{% url 'properties_Project_list' %}" class="btn btn-outline-light rounded-pill px-4">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                            <button type="submit" value="Save" class="btn btn-primary rounded-pill px-4 py-2">
+                                <i class="fas fa-save me-2"></i>Save Project
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-card {
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-card .card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-control, select {
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f9fafb;
+}
+
+.form-control:focus, select:focus {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: #6366f1;
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+    color: #fff;
+}
+
+.form-control:not(:disabled):hover, select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+select {
+    background: rgba(15, 23, 42, 0.8) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") no-repeat right 0.75rem center/16px 12px;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select option {
+    background: rgba(30, 41, 59, 0.95);
+    color: #f9fafb;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.btn {
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.alert {
+    border: none;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.2);
+    color: #fecaca;
+}
+
+.alert strong {
+    color: #fca5a5;
+}
+
+.alert ul {
+    padding-left: 1.5rem;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add animation to form card
+    const formCard = document.querySelector('.form-card');
+    formCard.style.opacity = '0';
+    formCard.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        formCard.style.transition = 'opacity 0.5s, transform 0.5s';
+        formCard.style.opacity = '1';
+        formCard.style.transform = 'translateY(0)';
+    }, 100);
+    
+    // Character counter for description
+    const descriptionField = document.getElementById('description');
+    const descriptionHelp = document.querySelector('[for="description"] + .form-text');
+    
+    if (descriptionField && descriptionHelp) {
+        const updateCounter = () => {
+            const maxLength = 100;
+            const currentLength = descriptionField.value.length;
+            const remaining = maxLength - currentLength;
+            
+            if (remaining < 0) {
+                descriptionHelp.innerHTML = `<span class="text-danger">${Math.abs(remaining)} characters over limit</span>`;
+            } else {
+                descriptionHelp.innerHTML = `${remaining} characters remaining`;
+            }
+        };
+        
+        descriptionField.addEventListener('input', updateCounter);
+        updateCounter(); // Initialize counter
+    }
+    
+    // Style the category dropdown
+    const categoryField = document.getElementById('id_category');
+    if (categoryField) {
+        categoryField.classList.add('form-control', 'form-control-lg', 'bg-dark', 'text-light', 'border-0');
+    }
+});
+</script>
 {% endblock %}

@@ -130,7 +130,7 @@ class Product(models.Model):
 
     # Fields
     name = models.CharField(max_length=30)
-    image = models.ImageField(upload_to="upload/images/")
+    image = models.ImageField(upload_to="images/")
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True, editable=False)

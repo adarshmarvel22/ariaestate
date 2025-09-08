@@ -128,3 +128,13 @@ class Unit(models.Model):
 
     def get_htmx_delete_url(self):
         return reverse("properties_Unit_htmx_delete", args=(self.pk,))
+
+class ProjectImage(models.Model):
+    project = models.ForeignKey("Project", on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to="project_images/", null=True, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return f"Image for {self.project.title}"
+
+    

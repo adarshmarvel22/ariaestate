@@ -11,7 +11,7 @@ class Document(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     uploaded_at = models.DateTimeField()
-    file = models.FileField(upload_to="upload/files/")
+    file = models.FileField(upload_to="files/")
 
     class Meta:
         pass

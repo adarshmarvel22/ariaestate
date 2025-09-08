@@ -1,25 +1,260 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    
-<p>
-    <a class="btn btn-light" href="{% url 'properties_Project_list' %}">
-    Project Listing
-    </a>
-</p>
-    
-<table class="table">
-    <tr><td>last_updated</td><td>{{ object.last_updated }}</td></tr>
-    <tr><td>launch_date</td><td>{{ object.launch_date }}</td></tr>
-    <tr><td>price_range</td><td>{{ object.price_range }}</td></tr>
-    <tr><td>title</td><td>{{ object.title }}</td></tr>
-    <tr><td>description</td><td>{{ object.description }}</td></tr>
-    <tr><td>created</td><td>{{ object.created }}</td></tr>
-    <tr><td>id</td><td>{{ object.id }}</td></tr>
-    <tr><td>location</td><td>{{ object.location }}</td></tr>
-    <tr><td>category</td><td>{{ object.category }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+<div class="container-fluid py-4">
+    <!-- Header with back button -->
+    <div class="d-flex align-items-center mb-4">
+        <a href="{% url 'properties_Project_list' %}" class="btn btn-outline-light rounded-circle me-3">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h1 class="h3 text-white mb-0">Project Details</h1>
+    </div>
 
+    <!-- Details Card -->
+    <div class="card border-0 shadow-lg detail-card">
+        <div class="card-header bg-dark py-3 border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="text-white mb-0">{{ object.title }}</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" 
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <a class="dropdown-item text-info" href="{{object.get_update_url}}">
+                                <i class="fas fa-edit me-2"></i>Edit Project
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="{% url 'properties_Project_delete' object.pk %}">
+                                <i class="fas fa-trash me-2"></i>Delete Project
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Basic Info Section -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="detail-item mb-4">
+                        <div class="detail-label">ID</div>
+                        <div class="detail-value">{{ object.id }}</div>
+                        <div class="detail-help">Unique identifier for this project</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-item mb-4">
+                        <div class="detail-label">Category</div>
+                        <div class="detail-value">
+                            <span class="badge bg-secondary">{{ object.category.name }}</span>
+                        </div>
+                        <div class="detail-help">Project category classification</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Details Section -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="detail-item mb-4">
+                        <div class="detail-label">Location</div>
+                        <div class="detail-value">
+                            <i class="fas fa-map-marker-alt me-2 text-muted"></i>
+                            {{ object.location }}
+                        </div>
+                        <div class="detail-help">Project location address</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-item mb-4">
+                        <div class="detail-label">Price Range</div>
+                        <div class="detail-value text-primary fw-bold">{{ object.price_range }}</div>
+                        <div class="detail-help">Price range for units in this project</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Launch Date -->
+            <div class="detail-item mb-4">
+                <div class="detail-label">Launch Date</div>
+                <div class="detail-value">
+                    <i class="fas fa-calendar-alt me-2 text-muted"></i>
+                    {{ object.launch_date|date:"F d, Y" }}
+                </div>
+                <div class="detail-help">Scheduled project launch date</div>
+            </div>
+
+            <!-- Description -->
+            <div class="detail-item mb-4">
+                <div class="detail-label">Description</div>
+                <div class="detail-value">{{ object.description }}</div>
+                <div class="detail-help">Detailed description of the project</div>
+            </div>
+
+            <!-- Metadata Section -->
+            <div class="row mt-4 pt-4 border-top">
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <div class="detail-label">Created</div>
+                        <div class="detail-value">
+                            <i class="fas fa-plus-circle me-2 text-muted"></i>
+                            {{ object.created|date:"M d, Y H:i" }}
+                        </div>
+                        <div class="detail-help">When this project was created</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <div class="detail-label">Last Updated</div>
+                        <div class="detail-value">
+                            <i class="fas fa-sync-alt me-2 text-muted"></i>
+                            {{ object.last_updated|date:"M d, Y H:i" }}
+                        </div>
+                        <div class="detail-help">When this project was last modified</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for img in object.images.all %}
+                    <div class="col-md-3 mb-3">
+                        <img src="{{ img.image.url }}" class="img-fluid rounded shadow" alt="Project Image">
+                    </div>
+                {% empty %}
+                    <p class="text-muted">No images uploaded yet.</p>
+                {% endfor %}
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top">
+                <a href="{% url 'properties_Project_list' %}" class="btn btn-outline-light rounded-pill px-4">
+                    <i class="fas fa-list me-2"></i>Back to List
+                </a>
+                <a href="{{object.get_update_url}}" class="btn btn-primary rounded-pill px-4 py-2">
+                    <i class="fas fa-edit me-2"></i>Edit Project
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.detail-card {
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-card .card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-item {
+    padding: 0.5rem 0;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #f9fafb;
+    margin-bottom: 0.25rem;
+    word-break: break-word;
+}
+
+.detail-help {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.badge {
+    font-size: 0.875rem;
+    padding: 0.35em 0.65em;
+}
+
+.btn {
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    background: rgba(30, 41, 59, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.dropdown-item {
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.border-top {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Animation for detail items */
+.animate-detail-item {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.4s, transform 0.4s;
+}
+
+.animate-detail-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add animation to detail card
+    const detailCard = document.querySelector('.detail-card');
+    detailCard.style.opacity = '0';
+    detailCard.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        detailCard.style.transition = 'opacity 0.5s, transform 0.5s';
+        detailCard.style.opacity = '1';
+        detailCard.style.transform = 'translateY(0)';
+    }, 100);
+    
+    // Add subtle animation to detail items
+    const detailItems = document.querySelectorAll('.detail-item');
+    detailItems.forEach((item, index) => {
+        item.classList.add('animate-detail-item');
+        
+        setTimeout(() => {
+            item.classList.add('visible');
+        }, 200 + (index * 100));
+    });
+});
+</script>
 {% endblock %}
