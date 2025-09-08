@@ -21,7 +21,7 @@ media/
 staticfiles/
 static/
 local_settings.py
-upload/images/
+media/
 
 
 # Environment
@@ -59,6 +59,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+migrations/
 
 # Jupyter Notebook
 .ipynb_checkpoints
